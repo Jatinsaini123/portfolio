@@ -1,0 +1,290 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Modern Portfolio Design System - Dark Theme with Glassmorphism */
+
+@layer base {
+  :root {
+    /* Light Theme Colors */
+    --background: 210 40% 98%;
+    --background-secondary: 210 40% 95%;
+    --foreground: 222 84% 4.9%;
+    
+    /* Glass Effect Colors */
+    --glass: 255 255 255 / 0.1;
+    --glass-border: 222 84% 4.9% / 0.1;
+    --glass-hover: 255 255 255 / 0.15;
+  }
+
+  .dark {
+    /* Core Dark Portfolio Colors */
+    --background: 222 84% 4.9%;
+    --background-secondary: 217 33% 17%;
+    --foreground: 210 40% 98%;
+    
+    /* Glass Effect Colors */
+    --glass: 217 33% 17% / 0.1;
+    --glass-border: 210 40% 98% / 0.1;
+    --glass-hover: 217 33% 25% / 0.15;
+    
+    /* Accent Colors */
+    --primary: 237 100% 70%;
+    --primary-foreground: 210 40% 98%;
+    --primary-glow: 237 100% 80%;
+    
+    --secondary: 280 100% 70%;
+    --secondary-foreground: 210 40% 98%;
+    --secondary-glow: 280 100% 80%;
+    
+    /* Gradient Definitions */
+    --gradient-primary: linear-gradient(135deg, hsl(237 100% 70%), hsl(280 100% 70%));
+    --gradient-hero: linear-gradient(135deg, hsl(222 84% 4.9%) 0%, hsl(237 50% 15%) 50%, hsl(280 50% 15%) 100%);
+    --gradient-card: linear-gradient(135deg, hsl(217 33% 17% / 0.1) 0%, hsl(237 50% 25% / 0.05) 100%);
+    
+    /* Shadow & Effects */
+    --shadow-glass: 0 8px 32px 0 hsl(222 84% 4.9% / 0.37);
+    --shadow-glow: 0 0 40px hsl(237 100% 70% / 0.3);
+    --shadow-card: 0 4px 20px hsl(222 84% 4.9% / 0.5);
+    
+    /* Animation & Transitions */
+    --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    --transition-bounce: all 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+    
+    /* Standard UI Colors */
+    --card: 217 33% 17%;
+    --card-foreground: 210 40% 98%;
+    --muted: 217 33% 25%;
+    --muted-foreground: 215 20% 65%;
+    --accent: 237 100% 70%;
+    --accent-foreground: 210 40% 98%;
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 210 40% 98%;
+    --border: 217 33% 25%;
+    --input: 217 33% 17%;
+    --ring: 237 100% 70%;
+    --radius: 0.75rem;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply bg-background text-foreground overflow-x-hidden;
+    background: var(--gradient-hero);
+    background-attachment: fixed;
+  }
+  
+  /* Custom Scrollbar */
+  ::-webkit-scrollbar {
+    width: 8px;
+  }
+  
+  ::-webkit-scrollbar-track {
+    background: hsl(var(--background-secondary));
+  }
+  
+  ::-webkit-scrollbar-thumb {
+    background: var(--gradient-primary);
+    border-radius: 4px;
+  }
+  
+  ::-webkit-scrollbar-thumb:hover {
+    background: hsl(var(--primary));
+  }
+}
+
+@layer components {
+  /* Glass Morphism Effect */
+  .glass {
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    box-shadow: var(--shadow-glass);
+  }
+  
+  .glass-card {
+    @apply glass rounded-2xl p-6 transition-all duration-300;
+  }
+  
+  .glass-card:hover {
+    background: rgba(255, 255, 255, 0.08);
+    transform: translateY(-5px);
+    box-shadow: var(--shadow-glass), var(--shadow-glow);
+  }
+  
+  /* Gradient Text */
+  .gradient-text {
+    background: var(--gradient-primary);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+  
+  /* Glow Effects */
+  .glow {
+    box-shadow: var(--shadow-glow);
+  }
+  
+  /* Section Spacing */
+  .section-padding {
+    @apply py-20 px-4 md:px-8 lg:px-12;
+  }
+  
+  /* Animated Underline */
+  .animated-underline {
+    @apply relative;
+  }
+  
+  .animated-underline::after {
+    @apply absolute bottom-0 left-0 w-0 h-0.5 bg-gradient-to-r from-primary to-secondary transition-all duration-300;
+    content: '';
+  }
+  
+  .animated-underline:hover::after {
+    @apply w-full;
+  }
+  
+  /* Floating Animation */
+  .float {
+    animation: float 6s ease-in-out infinite;
+  }
+  
+  @keyframes float {
+    0%, 100% { transform: translateY(0px); }
+    50% { transform: translateY(-20px); }
+  }
+  
+  /* Fade In Animations */
+  .fade-in {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: var(--transition-smooth);
+  }
+  
+  .fade-in.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  
+  /* Typing Animation */
+  .typing::after {
+    content: '|';
+    animation: blink 1s infinite;
+  }
+
+  @keyframes blink {
+    0%, 50% { opacity: 1; }
+    51%, 100% { opacity: 0; }
+  }
+
+  /* Parallax Effects */
+  .parallax {
+    transform: translateZ(0);
+    will-change: transform;
+  }
+
+  /* Enhanced Focus Animations */
+  .input-focus {
+    @apply transition-all duration-300 ease-out;
+  }
+
+  .input-focus:focus {
+    @apply scale-105 shadow-glow;
+    transform: translateY(-2px) scale(1.02);
+  }
+
+  /* Stagger Animation */
+  .stagger-item {
+    opacity: 0;
+    transform: translateY(30px);
+    animation: staggerFadeIn 0.6s ease-out forwards;
+  }
+
+  @keyframes staggerFadeIn {
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  /* Project Card Enhanced Hover */
+  .project-card {
+    @apply transition-all duration-500 ease-out;
+    transform-style: preserve-3d;
+  }
+
+  .project-card:hover {
+    transform: translateY(-10px) scale(1.02);
+    box-shadow: var(--shadow-glow), 0 20px 40px hsl(var(--background) / 0.3);
+  }
+
+  /* Filter Transition */
+  .filter-enter {
+    opacity: 0;
+    transform: scale(0.8) translateY(20px);
+    animation: filterEnter 0.4s ease-out forwards;
+  }
+
+  .filter-exit {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+    animation: filterExit 0.3s ease-in forwards;
+  }
+
+  @keyframes filterEnter {
+    to {
+      opacity: 1;
+      transform: scale(1) translateY(0);
+    }
+  }
+
+  @keyframes filterExit {
+    to {
+      opacity: 0;
+      transform: scale(0.8) translateY(-20px);
+    }
+  }
+  
+  /* Progress Bar Animation */
+  .progress-bar {
+    @apply relative overflow-hidden rounded-full h-2;
+    background: rgba(255, 255, 255, 0.1);
+  }
+  
+  .progress-fill {
+    @apply h-full rounded-full;
+    background: var(--gradient-primary);
+    transform: translateX(-100%);
+    transition: transform 1.5s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+  
+  .progress-fill.animate {
+    transform: translateX(0);
+  }
+  
+  /* Button Variants */
+  .btn-primary {
+    @apply px-8 py-3 rounded-full text-white font-medium relative overflow-hidden;
+    background: var(--gradient-primary);
+    box-shadow: var(--shadow-card);
+    transition: var(--transition-smooth);
+  }
+  
+  .btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-glow);
+  }
+  
+  .btn-glass {
+    @apply glass px-6 py-2 rounded-full text-foreground font-medium hover:bg-white/10;
+    transition: var(--transition-smooth);
+  }
+}
